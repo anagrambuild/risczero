@@ -26,6 +26,8 @@ ENV CARGO_HOME=/usr/local/cargo
 ENV RUSTUP_HOME=/usr/local/rustup
 ENV PATH=${PATH}:/usr/local/cargo/bin:/go/bin:/home/solana/.local/share/solana/install/releases/${SOLANA}/bin
 
+USER solana
+
 RUN cargo install cargo-binstall && \
     yes | cargo binstall cargo-risczero && \
     if [ "${TARGETARCH}" = "amd64" -o "${TARGETARCH}" = "linux/amd64" ]; then \
@@ -36,10 +38,9 @@ RUN cargo install cargo-binstall && \
     fi
 
 LABEL \
-    org.label-schema.name="risc0" \
-    org.label-schema.description="Risc0 Development Container" \
-    org.label-schema.url="https://github.com/anagrambuild/risc0" \
-    org.label-schema.vcs-url="git@github.com/anagrambuild/risc0.git" \
-    org.label-schema.vendor="anagram.xyz" \
-    org.label-schema.schema-version="1.0" \
-    org.opencontainers.image.description="Risc0 Development Container"
+    org.opencontainers.image.name="risc0" \
+    org.opencontainers.image.description="Risc0 Development Container" \
+    org.opencontainers.image.url="https://github.com/anagrambuild/risc0" \
+    org.opencontainers.image.source="https://github.com/anagrambuild/risc0.git" \
+    org.opencontainers.image.vendor="anagram.xyz" \
+    org.opencontainers.image.version="1.0"
