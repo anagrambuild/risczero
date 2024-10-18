@@ -26,9 +26,14 @@ ENV CARGO_HOME=/usr/local/cargo
 ENV RUSTUP_HOME=/usr/local/rustup
 ENV PATH=${PATH}:/usr/local/cargo/bin:/go/bin:/home/solana/.local/share/solana/install/releases/${SOLANA}/bin
 
-RUN cargo install cargo-binstall
-RUN yes | cargo binstall cargo-risczero
-RUN cargo risczero build-toolchain
+RUN cargo install cargo-binstall && \
+    yes | cargo binstall cargo-risczero && \
+    if [[ "${TARGETARCH}" == "amd64" || "${TARGETARCH}" == "linux/amd64" ]]; then \
+        cargo risczero install; \
+    else \
+        echo "building risc0 toolchain"; \
+        cargo risczero build-toolchain; \
+    fi
 
 LABEL \
     org.label-schema.name="risc0" \
