@@ -1,3 +1,7 @@
+# 1.0.3 (2024-10-19)
+
+* separate into more layers to work around size limitations
+
 # 1.0.2 (2024-10-18)
 
 * package settings and description

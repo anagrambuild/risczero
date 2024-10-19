@@ -29,8 +29,8 @@ ENV PATH=${PATH}:/usr/local/cargo/bin:/go/bin:/home/solana/.local/share/solana/i
 USER solana
 
 RUN cargo install cargo-binstall && \
-    yes | cargo binstall cargo-risczero && \
-    if [ "${TARGETARCH}" = "amd64" -o "${TARGETARCH}" = "linux/amd64" ]; then \
+    yes | cargo binstall cargo-risczero
+RUN if [ "${TARGETARCH}" = "amd64" -o "${TARGETARCH}" = "linux/amd64" ]; then \
         cargo risczero install; \
     else \
         echo "building risc0 toolchain"; \
